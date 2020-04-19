@@ -20,14 +20,16 @@ export class UsersComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.users = new Array<User>();
+    this.refreshData();
+  }
 
+  refreshData() {
     this.httpClientService
       .getUsers()
-      .subscribe((response) => this.handleSuccesResponse(response));
+      .subscribe((response) => this.handleSuccessfulResponse(response));
 
     this.activatedRoute.queryParams.subscribe((params) => {
-      this.action = params[this.action];
+      this.action = params["action"];
     });
   }
 
@@ -38,7 +40,8 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  handleSuccesResponse(response) {
+  handleSuccessfulResponse(response) {
     this.users = response;
+    console.log(this.users);
   }
 }

@@ -5,6 +5,7 @@ import com.turanshukur.bookstore.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
 
 @RestController
@@ -15,8 +16,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/create")
-    public void createUser(@RequestBody User user){
+    @PostMapping("/add")
+    public void addUser(@RequestBody User user){
         userService.createUser(user);
     }
 
@@ -25,5 +26,8 @@ public class UserController {
         return userService.getUsers();
     }
 
-
+    @DeleteMapping("/delete/{id}")
+    public void deleteUser(@PathVariable Long id){
+        userService.deleteUser(id);
+    }
 }
