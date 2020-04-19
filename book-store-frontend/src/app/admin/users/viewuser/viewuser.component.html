@@ -1,0 +1,18 @@
+<div class="userDetails">
+  <table class="table table-bordered">
+    <tr>
+      <td scope="col">User Id</td>
+      <td scope="col">{{ user.id }}</td>
+    </tr>
+    <tr>
+      <td scope="col">User Name</td>
+      <td scope="col">{{ user.name }}</td>
+    </tr>
+    <tr>
+      <td scope="col">User Type</td>
+      <td scope="col">{{ user.type }}</td>
+    </tr>
+  </table>
+  <hr />
+  <a href="" class="btn btn-danger" (click)="deleteUser()">Delete</a>
+</div>

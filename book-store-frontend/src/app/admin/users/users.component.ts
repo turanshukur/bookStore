@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { User } from "src/app/model/User";
-import { HttpClientService } from "src/app/service/http-client.service";
-import { Router, ActivatedRoute } from "@angular/router";
+import { User } from "../../model/User";
+import { HttpClientService } from "../../service/http-client.service";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: "app-users",
@@ -10,8 +10,8 @@ import { Router, ActivatedRoute } from "@angular/router";
 })
 export class UsersComponent implements OnInit {
   users: Array<User>;
-  action: string;
   selectedUser: User;
+  action: string;
 
   constructor(
     private httpClientService: HttpClientService,
@@ -30,6 +30,22 @@ export class UsersComponent implements OnInit {
 
     this.activatedRoute.queryParams.subscribe((params) => {
       this.action = params["action"];
+      const selectedUserId = params["id"];
+      if (selectedUserId) {
+        this.selectedUser = this.users.find(
+          (user) => user.id === +selectedUserId
+        );
+      }
+    });
+  }
+
+  handleSuccessfulResponse(response) {
+    this.users = response;
+  }
+
+  viewUser(id: number) {
+    this.router.navigate(["admin", "users"], {
+      queryParams: { id, action: "view" },
     });
   }
 
@@ -38,10 +54,5 @@ export class UsersComponent implements OnInit {
     this.router.navigate(["admin", "users"], {
       queryParams: { action: "add" },
     });
-  }
-
-  handleSuccessfulResponse(response) {
-    this.users = response;
-    console.log(this.users);
   }
 }
