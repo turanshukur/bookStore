@@ -31,6 +31,7 @@ export class UsersComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe((params) => {
       this.action = params["action"];
       const selectedUserId = params["id"];
+
       if (selectedUserId) {
         this.selectedUser = this.users.find(
           (user) => user.id === +selectedUserId
