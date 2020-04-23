@@ -2,6 +2,7 @@ export class Book {
   id: number;
   name: string;
   author: string;
-  price: string;
+  price: number;
   picByte: string;
+  retrivedImage: string;
 }

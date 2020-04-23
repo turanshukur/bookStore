@@ -18,7 +18,7 @@ public class Book {
     @Column
     private String price;
 
-    @Column(length = 1000)
+    @Column
     private byte[] picByte;
 
     public Long getId() {
