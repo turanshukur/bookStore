@@ -35,4 +35,15 @@ export class HttpClientService {
       newBook
     );
   }
+
+  deleteBook(id) {
+    return this.httpClient.delete<Book>("http://localhost:8080/book/" + id);
+  }
+
+  updateBook(updatedBook: Book) {
+    return this.httpClient.post<Book>(
+      "hht://localhost:8080/book/update",
+      updatedBook
+    );
+  }
 }

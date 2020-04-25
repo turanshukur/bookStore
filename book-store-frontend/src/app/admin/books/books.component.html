@@ -32,6 +32,7 @@
     <app-viewbook
       *ngIf="action === 'view'"
       [book]="selectedBook"
+      (bookDeletedEvent)="refreshData()"
     ></app-viewbook>
   </div>
 </div>

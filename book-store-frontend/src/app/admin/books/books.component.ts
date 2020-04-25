@@ -10,9 +10,9 @@ import { ActivatedRoute, Router } from "@angular/router";
 })
 export class BooksComponent implements OnInit {
   books: Array<Book>;
+  booksRecieved: Array<Book>;
   selectedBook: Book;
   action: string;
-  booksRecieved: Array<Book>;
 
   constructor(
     private httpClientService: HttpClientService,
@@ -28,7 +28,6 @@ export class BooksComponent implements OnInit {
     this.httpClientService
       .getBooks()
       .subscribe((response) => this.handleSuccessfulResponse(response));
-
     this.activedRoute.queryParams.subscribe((params) => {
       // get the url parameter named action. this can either be add or view.
       this.action = params["action"];
@@ -39,28 +38,29 @@ export class BooksComponent implements OnInit {
       // the books array
       if (id) {
         this.selectedBook = this.books.find((book) => {
-          return (book.id = +id);
+          return book.id === +id;
         });
       }
     });
   }
+
   // we will be taking the books response returned from the database
   // and we will be adding the retrieved
   handleSuccessfulResponse(response) {
-    this.books = Array<Book>();
+    this.books = new Array<Book>();
     //get books returned by the api call
     this.booksRecieved = response;
     for (const book of this.booksRecieved) {
-      const bookWithRetrievedImageField = new Book();
-      bookWithRetrievedImageField.id = book.id;
-      bookWithRetrievedImageField.name = book.name;
+      const bookwithRetrievedImageField = new Book();
+      bookwithRetrievedImageField.id = book.id;
+      bookwithRetrievedImageField.name = book.name;
       //populate retrieved image field so that book image can be displayed
-      bookWithRetrievedImageField.retrivedImage =
+      bookwithRetrievedImageField.retrievedImage =
         "data:image/jpeg;base64," + book.picByte;
-      bookWithRetrievedImageField.author = book.author;
-      bookWithRetrievedImageField.price = book.price;
-      bookWithRetrievedImageField.picByte = book.picByte;
-      this.books.push(bookWithRetrievedImageField);
+      bookwithRetrievedImageField.author = book.author;
+      bookwithRetrievedImageField.price = book.price;
+      bookwithRetrievedImageField.picByte = book.picByte;
+      this.books.push(bookwithRetrievedImageField);
     }
   }
 

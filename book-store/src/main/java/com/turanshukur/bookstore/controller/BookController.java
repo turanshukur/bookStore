@@ -23,7 +23,7 @@ public class BookController {
     @PostMapping("/upload")
     public void uploadImage(@RequestParam("imageFile") MultipartFile file) throws IOException {
         this.bytes = file.getBytes();
-        System.out.println("testttt");
+
 
     }
 
@@ -32,7 +32,7 @@ public class BookController {
         book.setPicByte(this.bytes);
         bookService.addBook(book);
         this.bytes = null;
-        System.out.println("elave olundu");
+
     }
 
     @GetMapping("get/all")
@@ -48,5 +48,10 @@ public class BookController {
     @DeleteMapping("/{id}")
     public void deleteBook(@PathVariable Long id){
         bookService.deleteBook(id);
+    }
+
+    @PostMapping("/update")
+    public void updateBook(@RequestBody Book book){
+        bookService.update(book);
     }
 }

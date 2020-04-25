@@ -1,1 +1,24 @@
-<p>viewbook works!</p>
+<h1>Book Details</h1>
+<table>
+  <tr>
+    <td>Book ID</td>
+    <td>{{ book.id }}</td>
+  </tr>
+  <tr>
+    <td>Book Name</td>
+    <td>{{ book.name }}</td>
+  </tr>
+  <tr>
+    <td>Book Author</td>
+    <td>{{ book.author }}</td>
+  </tr>
+  <tr>
+    <td>Book Price</td>
+    <td>{{ book.price }}</td>
+  </tr>
+  <br />
+  <img src="{{ book.retrievedImage }}" height="200" width="200" />
+  <br /><br />
+  <button class="btn btn-danger" (click)="deleteBook()">delete</button>
+  <button class="btn btn-warning ml-2" (click)="editBook()">Edit</button>
+</table>
